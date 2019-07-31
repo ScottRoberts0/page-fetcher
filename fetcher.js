@@ -8,7 +8,6 @@ const rl = readline.createInterface({
   output: process.stdout
 });
 
-console.log(urlAndFile);
 
 const request = require('request');
 const fs = require('fs');
@@ -32,14 +31,14 @@ request(url, (error, response, body) => {
         rl.close();
       });
     } else {
-      rl.close();
+
       fs.writeFile(saveFile, body, function (err) {
         if (err) throw err;
         console.log(`Downloaded and saved ${body.length} bytes to ${saveFile}`);
       });
     }
-     
   } else {
+
     if (error) {
       console.log("Error! Nothing Written to File", error);
     }
@@ -47,9 +46,9 @@ request(url, (error, response, body) => {
     if (response.statusCode !== 200) {
       console.log("Response code came back unsuccessful! Response code:", response.statusCode);
     }
-    
-  }
 
+  }
+  rl.close();
 });
 
 
